@@ -196,7 +196,7 @@ resource "aws_db_instance" "internal_reporting_snapshot_dev" {
   publicly_accessible                 = "false"
   skip_final_snapshot                 = true
   storage_encrypted                   = true
-  storage_type                        = "gp3"
+  storage_type                        = "gp2"
   vpc_security_group_ids              = [aws_security_group.internal_tableau_db.id]
   ca_cert_identifier                  = var.environment == "prod" ? "rds-ca-rsa2048-g1" : "rds-ca-rsa2048-g1"
   engine_version                      = var.environment == "prod" ? "14.15" : "14.15"
@@ -239,7 +239,7 @@ resource "aws_db_instance" "internal_reporting_snapshot_qa" {
   publicly_accessible                 = "false"
   skip_final_snapshot                 = true
   storage_encrypted                   = true
-  storage_type                        = "gp3"
+  storage_type                        = "gp2"
   vpc_security_group_ids              = [aws_security_group.internal_tableau_db.id]
   ca_cert_identifier                  = var.environment == "prod" ? "rds-ca-rsa2048-g1" : "rds-ca-rsa2048-g1"
   engine_version                      = var.environment == "prod" ? "14.15" : "14.15"
