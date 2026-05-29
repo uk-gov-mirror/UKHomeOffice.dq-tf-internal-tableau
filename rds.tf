@@ -105,7 +105,7 @@ resource "aws_db_instance" "postgres" {
   identifier                      = "postgres-${local.naming_suffix}"
   auto_minor_version_upgrade      = "false"
   allocated_storage               = var.environment == "prod" ? "4000" : "4000"
-  storage_type                    = "gp2"
+  storage_type                    = var.environment == "prod" ? "gp2" : "gp3"
   engine                          = "postgres"
   engine_version                  = var.environment == "prod" ? "14.22" : "14.22"
   instance_class                  = var.environment == "prod" ? "db.m5.4xlarge" : "db.m5.4xlarge"
@@ -260,7 +260,6 @@ resource "aws_db_instance" "internal_reporting_snapshot_qa" {
   }
 }
 
-
 resource "aws_db_instance" "internal_reporting_snapshot_stg" {
   count                               = local.internal_reporting_stg_count
   snapshot_identifier                 = var.environment == "prod" ? "rds:postgres-internal-tableau-apps-prod-dq-2026-02-17-00-08" : "rds:postgres-internal-tableau-apps-notprod-dq-2022-05-05-07-08"
@@ -283,7 +282,7 @@ resource "aws_db_instance" "internal_reporting_snapshot_stg" {
   publicly_accessible                 = "false"
   skip_final_snapshot                 = true
   storage_encrypted                   = true
-  storage_type                        = "gp2"
+  storage_type                        = var.environment == "prod" ? "gp2" : "gp3"
   vpc_security_group_ids              = [aws_security_group.internal_tableau_db.id]
   ca_cert_identifier                  = var.environment == "prod" ? "rds-ca-rsa2048-g1" : "rds-ca-rsa2048-g1"
   monitoring_interval                 = "60"
