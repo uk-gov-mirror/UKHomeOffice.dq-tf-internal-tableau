@@ -138,6 +138,7 @@ resource "aws_db_instance" "postgres" {
     prevent_destroy = true
     ignore_changes = [
       #engine_version,
+      storage_type,
     ]
   }
 
@@ -210,6 +211,9 @@ resource "aws_db_instance" "internal_reporting_snapshot_dev" {
 
   lifecycle {
     prevent_destroy = true
+    ignore_changes = [
+      storage_type,
+    ]
   }
 
   tags = {
@@ -253,6 +257,9 @@ resource "aws_db_instance" "internal_reporting_snapshot_qa" {
 
   lifecycle {
     prevent_destroy = true
+    ignore_changes = [
+      storage_type,
+    ]
   }
 
   tags = {
@@ -313,6 +320,7 @@ resource "aws_db_instance" "internal_reporting_snapshot_stg" {
   lifecycle {
     ignore_changes = [
       engine_version,
+      storage_type,
     ]
   }
 
