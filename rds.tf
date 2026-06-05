@@ -138,7 +138,7 @@ resource "aws_db_instance" "postgres" {
     prevent_destroy = true
     ignore_changes = [
       #engine_version,
-      #storage_type,
+      storage_type,
     ]
   }
 
